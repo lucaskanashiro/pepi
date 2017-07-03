@@ -7,6 +7,9 @@ verify () {
   fi
 }
 
+default_success_message="Your job is done! =)"
+default_error_message="Your job failed! =("
+
 error_sound_file="/usr/share/sounds/freedesktop/stereo/suspend-error.oga"
 success_sound_file="/usr/share/sounds/freedesktop/stereo/complete.oga"
 sound_files=($success_sound_file $error_sound_file)
@@ -23,21 +26,17 @@ done
 
 notify_with_sound () {
   if [ $? != 0 ]; then
-    paplay $error_sound_file
+    notify-send "$default_error_message" --urgency=critical --hint=string:sound-file:$error_sound_file
     exit 4
   else
-    paplay $success_sound_file
+    notify-send "$default_success_message" --hint=string:sound-file:$success_sound_file
     exit 0
   fi
 }
 
 # Verify dependencies
-paplay --version > /dev/null
-verify "Cannot find paplay. You need to install the pulseaudio-utils package"
-
 notify-send --version > /dev/null
 verify "Cannot find notify-send. You need to install the libnotify-bin package"
-
 
 
 if (( "$#" == 0 ))

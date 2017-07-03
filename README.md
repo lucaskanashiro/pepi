@@ -16,5 +16,5 @@ $ pepi sudo apt-get update
 
 In Debian, you need to install the following packages:
 ```
-$ sudo apt-get install libnotify-bin pulseaudio-utils sound-theme-freedesktop
+$ sudo apt-get install libnotify-bin sound-theme-freedesktop
 ```
