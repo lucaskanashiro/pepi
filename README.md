@@ -12,9 +12,17 @@ similar to the **time** CLI:
 $ pepi sudo apt-get update
 ```
 
-## Dependencies
+If the command passed as parameter for pepi runs succesfully, it will
+create a nice notification. Otherwise, it will warn you with an error message.
+
+## Setup
 
 In Debian, you need to install the following packages:
+* libnotify-bin
+* sound-theme-freedesktop
+
+If you want to install it from the source code, run the following script:
 ```
-$ sudo apt-get install libnotify-bin sound-theme-freedesktop
+$ ./install
 ```
+

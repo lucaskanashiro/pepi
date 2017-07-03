@@ -1,0 +1,23 @@
+#!/bin/bash
+
+ICON_PATH=/usr/share/icons/pepi
+BIN_PATH=/usr/local/bin
+
+sudo apt-get install libnotify-bin sound-theme-freedesktop -qy
+
+if [ ! -d $ICON_PATH ]
+then
+  sudo mkdir $ICON_PATH
+fi
+
+if [ ! -L $INSTALLED_ICON_PATH ]
+then
+  sudo ln -s "$(pwd)/icons/hourglass-small.png" $ICON_PATH
+fi
+
+if [ ! -L $BIN_PATH/pepi ]
+then  
+  sudo ln -s "$(pwd)/pepi" $BIN_PATH
+fi
+
+echo "pepi succesfully installed!"
