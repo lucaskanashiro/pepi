@@ -14,10 +14,18 @@ verify "Cannot find paplay. You need to install the pulseaudio-utils package"
 notify-send --version > /dev/null
 verify "Cannot find notify-send. You need to install the libnotify-bin package"
 
+file="/usr/share/sounds/freedesktop/stereo/complete.oga"
+if [ ! -f "$file" ]
+then
+  echo "Cannot find the required sound files. You need to install the sound-theme-freedesktop package"
+  exit 2
+fi
+
 if (( "$#" == 0 ))
 then
   echo "Pepi need a command to run, please pass a command as argument"
   exit 1
 else
-  echo "$@"
+  eval "$@"
+  paplay $file
 fi
