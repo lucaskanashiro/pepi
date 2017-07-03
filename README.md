@@ -11,3 +11,10 @@ similar to the **time** CLI:
 ```
 $ pepi sudo apt-get update
 ```
+
+## Dependencies
+
+In Debian, you need to install the following packages:
+```
+$ sudo apt-get install libnotify-bin pulseaudio-utils
+```
