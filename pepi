@@ -7,6 +7,30 @@ verify () {
   fi
 }
 
+error_sound_file="/usr/share/sounds/freedesktop/stereo/suspend-error.oga"
+success_sound_file="/usr/share/sounds/freedesktop/stereo/complete.oga"
+sound_files=($success_sound_file $error_sound_file)
+
+for file in $sound_files
+do
+  if [ ! -f "$file" ]
+  then
+    echo $file
+    echo "Cannot find the required sound files. You need to install the sound-theme-freedesktop package"
+    exit 3
+  fi
+done
+
+notify_with_sound () {
+  if [ $? != 0 ]; then
+    paplay $error_sound_file
+    exit 4
+  else
+    paplay $success_sound_file
+    exit 0
+  fi
+}
+
 # Verify dependencies
 paplay --version > /dev/null
 verify "Cannot find paplay. You need to install the pulseaudio-utils package"
@@ -14,12 +38,7 @@ verify "Cannot find paplay. You need to install the pulseaudio-utils package"
 notify-send --version > /dev/null
 verify "Cannot find notify-send. You need to install the libnotify-bin package"
 
-file="/usr/share/sounds/freedesktop/stereo/complete.oga"
-if [ ! -f "$file" ]
-then
-  echo "Cannot find the required sound files. You need to install the sound-theme-freedesktop package"
-  exit 2
-fi
+
 
 if (( "$#" == 0 ))
 then
@@ -27,5 +46,5 @@ then
   exit 1
 else
   eval "$@"
-  paplay $file
+  notify_with_sound
 fi
