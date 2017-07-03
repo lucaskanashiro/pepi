@@ -1,5 +1,19 @@
 #!/bin/bash
 
+verify () {
+  if [ $? != 0 ]; then
+    echo "$1"
+    exit 2
+  fi
+}
+
+# Verify dependencies
+paplay --version > /dev/null
+verify "Cannot find paplay. You need to install the pulseaudio-utils package"
+
+notify-send --version > /dev/null
+verify "Cannot find notify-send. You need to install the libnotify-bin package"
+
 if (( "$#" == 0 ))
 then
   echo "Pepi need a command to run, please pass a command as argument"
