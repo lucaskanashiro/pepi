@@ -21,7 +21,8 @@ In Debian, you need to install the following packages:
 * libnotify-bin
 * sound-theme-freedesktop
 
-If you want to install it from the source code, run the following script:
+If you want to install it from the source code, run the following script on
+Debian environment:
 ```
 $ ./install
 ```
