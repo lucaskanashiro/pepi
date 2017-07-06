@@ -20,4 +20,4 @@ then
   sudo ln -s "$(pwd)/pepi" $BIN_PATH
 fi
 
-echo "pepi succesfully installed!"
+echo "pepi successfully installed!"
