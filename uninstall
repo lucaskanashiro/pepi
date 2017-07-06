@@ -1,0 +1,16 @@
+#!/bin/bash
+
+ICON_PATH=/usr/share/icons/pepi
+BIN_PATH=/usr/local/bin
+
+if [ -d $ICON_PATH ]
+then
+  sudo rm -rf $ICON_PATH
+fi
+
+if [ -L $BIN_PATH/pepi ]
+then  
+  sudo rm $BIN_PATH/pepi
+fi
+
+echo "pepi successfully removed!"
