@@ -42,16 +42,13 @@ while [ "$#" -gt 0 ]; do
 done
 
 
-INSTALLED_ICON_PATH=/usr/share/icons/pepi/hourglass-small.png
-if [ -f $INSTALLED_ICON_PATH ]
-then
-  small_icon=$INSTALLED_ICON_PATH
-else
-  small_icon="$(pwd)/icons/hourglass-small.png"
-fi
-
 default_success_message="Your job is done! =)"
+default_success_icon="dialog-information"
+
 default_error_message="Your job failed! =("
+default_error_icon="dialog-warning"
+
+full_command="$@"
 
 error_sound_file="/usr/share/sounds/freedesktop/stereo/suspend-error.oga"
 success_sound_file="/usr/share/sounds/freedesktop/stereo/complete.oga"
@@ -69,10 +66,10 @@ done
 
 notify () {
   if [ $? != 0 ]; then
-    notify-send "$default_error_message" --icon=$small_icon --hint=string:sound-file:$error_sound_file
+    notify-send "$default_error_message" "$full_command" "--icon=$default_error_icon" --hint=string:sound-file:$error_sound_file
     exit 4
   else
-    notify-send "$default_success_message" --icon=$small_icon --hint=string:sound-file:$success_sound_file
+    notify-send "$default_success_message" "$full_command" "--icon=$default_success_icon" --hint=string:sound-file:$success_sound_file
     exit 0
   fi
 }
