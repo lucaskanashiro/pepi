@@ -7,6 +7,43 @@ verify () {
   fi
 }
 
+INFO_PATH=/usr/share/pepi/info
+if [ -d $INFO_PATH ]
+then
+  version_file=$INFO_PATH/version.txt
+  help_file=$INFO_PATH/help.txt
+else
+  version_file="$(pwd)/info/version.txt"
+  help_file="$(pwd)/info/help.txt"
+fi
+
+pepi_help () {
+  echo "Usage: pepi COMMAND"
+  echo "  pepi will notify you when COMMAND finishes"
+  echo "  and inform you whether it was successful, or failed."
+  exit
+}
+
+version () {
+  cat $version_file
+  exit
+}
+
+
+while [ "$#" -gt 0 ]; do
+  if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    pepi_help
+  elif [ "$1" == "-v" ] || [ "$1" == "--version" ]; then
+    version
+  elif [ "$1" == "--" ]; then
+    shift
+    break
+  else
+    break
+  fi
+done
+
+
 INSTALLED_ICON_PATH=/usr/share/icons/pepi/hourglass-small.png
 if [ -f $INSTALLED_ICON_PATH ]
 then
