@@ -7,6 +7,22 @@ verify () {
   fi
 }
 
+INFO_PATH=/usr/share/pepi/info
+if [ -d $INFO_PATH ]
+then
+  version_file=$INFO_PATH/version.txt
+else
+  version_file="$(pwd)/info/version.txt"
+fi
+
+case $1 in
+	-v | --version )
+    cat $version_file
+		exit
+		;;
+esac
+
+
 INSTALLED_ICON_PATH=/usr/share/icons/pepi/hourglass-small.png
 if [ -f $INSTALLED_ICON_PATH ]
 then
