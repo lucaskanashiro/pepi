@@ -1,0 +1,7 @@
+Usage: pepi COMMAND
+
+pepi will notify you when COMMAND finishes and inform you whether it was successful, or failed.
+
+Options:
+  -h, --help       Print usage
+  -v, --version    Print version information and quit

@@ -18,9 +18,7 @@ else
 fi
 
 pepi_help () {
-  echo "Usage: pepi COMMAND"
-  echo "  pepi will notify you when COMMAND finishes"
-  echo "  and inform you whether it was successful, or failed."
+  cat $help_file
   exit
 }
 
