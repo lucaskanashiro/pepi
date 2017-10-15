@@ -27,3 +27,8 @@ Debian environment:
 $ ./install
 ```
 
+To uninstall, run:
+```
+$ ./uninstall
+```
+
