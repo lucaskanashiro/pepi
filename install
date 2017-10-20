@@ -3,7 +3,26 @@
 ICON_PATH=/usr/share/icons/pepi
 BIN_PATH=/usr/local/bin
 
-sudo apt-get install libnotify-bin sound-theme-freedesktop -qy
+which apt-get 1> /dev/null 2>/dev/null
+HAS_APT_GET=$?
+which dnf 1> /dev/null 2>/dev/null
+HAS_DNF=$?
+which yum 1> /dev/null 2>/dev/null
+HAS_YUM=$?
+
+
+if [ "$HAS_APT_GET" -eq 0 ]; then
+  sudo apt-get install libnotify-bin sound-theme-freedesktop -qy
+elif [ "$HAS_DNF" -eq 0 ] || [ "$HAS_YUM" -eq 0 ]; then
+  if [ "$HAS_DNF" -eq 0 ]; then
+    sudo dnf install --assumeyes libnotify sound-theme-freedesktop
+  else
+    sudo yum install --assumeyes libnotify sound-theme-freedesktop
+  fi
+else
+  echo "Unrecognized package manager! :("
+  exit
+fi
 
 if [ ! -d $ICON_PATH ]
 then
